@@ -1,16 +1,79 @@
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-li,
-p {
+* {
+  box-sizing: border-box;
+}
+
+body,h1,h2,h3,h4,h5,h6,li,p {
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
+
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  border-top: 5px solid #660f66;
+  border-bottom: 1px solid #cbcbcb;
+  padding: 10px;
+}
+
+.head1 {
+  flex: 20%;
+  margin: 0;
+}
+
+.head2 {
+  flex: 60%;
+  text-align: center;
+  margin: 0;
+}
+
+.head3 {
+  flex: 20%;
+  margin: 0;
+}
+
+#sidenav {
+  background: none;
+  border: none;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#sidenav:hover {
+  color: #660f66;
+  transition-duration: 0.4s;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+}
+
+.column1 {
+  flex: 25%;
+  border-right: 1px solid #cbcbcb;
+}
+
+.column2 {
+  flex: 75%;
+}
+
+.note-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }
