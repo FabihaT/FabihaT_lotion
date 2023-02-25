@@ -6,7 +6,8 @@ body,h1,h2,h3,h4,h5,h6,li,p {
   margin: 0;
   padding: 0;
   overflow: hidden;
-}
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
 
 a {
   color: inherit;
@@ -20,7 +21,7 @@ a {
   align-items: center;
   width: 100%;
   height: auto;
-  border-top: 5px solid #660f66;
+  border-top: 5px solid #59308c;
   border-bottom: 1px solid #cbcbcb;
   padding: 10px;
 }
@@ -41,16 +42,16 @@ a {
   margin: 0;
 }
 
-#sidenav {
+.navbutton {
   background: none;
   border: none;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
   cursor: pointer;
 }
 
-#sidenav:hover {
-  color: #660f66;
+.navbutton:hover {
+  color: #59308c;
   transition-duration: 0.4s;
 }
 
@@ -72,8 +73,48 @@ main {
   flex: 75%;
 }
 
+input {
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}
+
 .note-head {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
+  border-bottom: 2px solid #cbcbcb;
+}
+
+#no-note {
+  text-align: center;
+  padding: 20px;
+  color: #59308c;
+}
+
+.new-note {
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #cbcbcb;
+}
+
+.new-note:hover {
+  background-color: #cbcbcb;
+  transition-duration: 0.4s;
+}
+
+.new-note.active {
+  background-color: #59308c;
+  color: white;
+}
+
+.side-panel-closed {
+  display: none;
+}
+
+.side-panel-open {
+  display: block;
 }
