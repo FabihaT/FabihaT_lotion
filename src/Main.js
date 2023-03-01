@@ -3,6 +3,23 @@ import Column2 from "./Column2";
 import {useState} from "react";
 import uuid from "react-uuid";
 
+//All fields of date and time
+const options = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+}
+//Format date and time in a format like Month Day, Year at Hour:Minutes AM/PM
+const formatDatetime = (when) => {
+  const formatted = new Date(when).toLocaleString("en-US", options);
+  if (formatted === "Invalid Date") {
+      return "";
+  }
+  return formatted;
+}
+
 function Main(event) {
     let column1State; //toggle the Column1 depending on the boolean value of showColumn1
     if (event.toggleColumn1) {
@@ -38,31 +55,22 @@ function Main(event) {
       //Find and return the active note or an empty object if there is none
       return notes.find((note) => note.id === selectedNote);
     }
-  
+
     const updateNote = (updatedNote) => {
-      const updateNoteArray = notes.map((note) => {
+      const updateNoteAttributes = {
+        ...updatedNote, //Add unmodified note fields to the updatedNote
+        datetime: formatDatetime(updatedNote.datetime) //Modify datetime format and save in updateNote
+      };
+    
+      const updatedNotes = notes.map((note) => {
         if (note.id === selectedNote) {
-          return updatedNote;
+          return updateNoteAttributes;
         }
         return note;
       });
-  
-      setNotes(updateNoteArray);
-    }
-  
-    // const updateNote = (updatedNote) => {
-    //   setNotes((prevNotes) => {
-    //     const updatedNotes = prevNotes.map((note) => {
-    //       if (note.id === updatedNote.id) {
-    //         return updatedNote;
-    //       } else {
-    //         return note;
-    //       }
-    //     });
-    //     return updatedNotes;
-    //   });
-    //   setSelectedNote(updatedNote);
-    // };
+    
+      setNotes(updatedNotes); //save updated notes to notes array
+    };
   
     return ( 
       <main>

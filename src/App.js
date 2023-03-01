@@ -17,23 +17,6 @@ function Header(event) {
   );
 }
 
-//All fields of date and time
-const options = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
-}
-//Format date and time in a format like Month Day, Year at Hour:Minutes AM/PM
-const formatDatetime = (when) => {
-  const formatted = new Date(when).toLocaleString("en-US", options);
-  if (formatted === "Invalid Date") {
-      return "";
-  }
-  return formatted;
-}
-
 function App() {
   const [toggleColumn1, setToggle] = useState(true); //Set state variable if Column1 is currently visible
 

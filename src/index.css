@@ -5,7 +5,7 @@
 body,h1,h2,h3,h4,h5,h6,li,p {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
  }
 
@@ -20,7 +20,7 @@ a {
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
-  height: auto;
+  height: 10vh;
   border-top: 5px solid #59308c;
   border-bottom: 1px solid #cbcbcb;
   padding: 10px;
@@ -60,17 +60,19 @@ main {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 10vh);
   padding: 0;
 }
 
 .column1 {
   flex: 25%;
+  max-height: 100%;
   border-right: 1px solid #cbcbcb;
 }
 
 .column2 {
   flex: 75%;
+  max-height: 100%;
 }
 
 input {
@@ -117,4 +119,16 @@ input:focus {
 
 .side-panel-open {
   display: block;
+}
+
+.sidepanel, .edit-all-notes{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.all-notes {
+  flex: 1;
+  overflow-y: auto;
 }
