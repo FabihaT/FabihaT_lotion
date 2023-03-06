@@ -1,25 +1,25 @@
-import {useState, useRef, useEffect} from "react";
+import {useState} from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
-function Column2({selectedNote, deleteNote, updateNote}) {
-  const [editMode, setEditMode] = useState(true);
-  const [editedNote, setEditedNote] = useState([]);
-
-  const editField = (key, value) => {
-    setEditedNote((prevNote) => ({
-      ...prevNote,
-      [key]: value,
+function Column2({selectedNote, deleteNote, updateNote, editMode, setEditMode}) {
+  const editField = (field, value) => {
+    updateNote({
+      ...selectedNote, //Add all current fields to updateNote
+      [field]: value, //Add modified values of title and body
       datetime: selectDatetime,
-    }));
+    });
+
   };
 
   const handleSave = () => {
     const updatedNote = {
-      ...editedNote,
+      ...selectedNote,
+      datetime: selectDatetime,
     };
 
-    updateNote(updatedNote);
+    updateNote(updatedNote); //Save modified selectedNote and datetime to updateNote
     setEditMode(false);
   };
 
@@ -41,7 +41,7 @@ function Column2({selectedNote, deleteNote, updateNote}) {
   let editorContents;
   if (!selectedNote) {
     editorContents = (
-      <div id="no-note">
+      <div id="no-note" style={{marginTop:"40vh"}}>
           <h1>Select a note, or create a new one.</h1>
       </div>
     );
@@ -56,7 +56,7 @@ function Column2({selectedNote, deleteNote, updateNote}) {
               style={{fontSize:"30px"}} 
               type="text"
               id="title"
-              value={editedNote.title || "Untitled"}
+              value={selectedNote.title}
               onChange={(e) => editField("title", e.target.value)}
               autoFocus />
             </div>
@@ -79,7 +79,7 @@ function Column2({selectedNote, deleteNote, updateNote}) {
             style={{height:"100vh"}}
             placeholder="Your Note Here"
             modules={modules}
-            value={editedNote.body}
+            value={selectedNote.body}
             onChange={(value) => editField("body", value)}
           />
         </div>

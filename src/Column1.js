@@ -1,8 +1,10 @@
+import { useNavigate, useParams } from "react-router-dom";
+
 function Column1({notes, addNote, selectedNote, setSelectedNote}) {
     let noteElements; //Sets note contents as new-note or no-note if the notes array is empty
     if (notes.length > 0) {
-      noteElements = notes.map((note) => ( //Creates new note in mapped array
-        <div key={note.id} className={`new-note ${note.id === selectedNote && "active"}`}
+      noteElements = notes.map((note, index) => ( //Creates new note in mapped array
+        <div key={index} className={`new-note ${note.id === selectedNote && "active"}`}
           onClick={() => setSelectedNote(note.id)}> {/*Sets active note when clicking on it*/}
           {/*Add title, date  , and body objects from addNote function*/}
           <h2>{note.title}</h2>

@@ -1,7 +1,7 @@
 import Column1 from "./Column1";
 import Column2 from "./Column2";
 import {useState} from "react";
-import uuid from "react-uuid";
+import { useNavigate, useParams } from "react-router-dom";
 
 //All fields of date and time
 const options = {
@@ -31,6 +31,7 @@ function Main(event) {
   
     const [notes, setNotes] = useState([]); //Set array of new notes setter and getter
     const [selectedNote, setSelectedNote] = useState(false);
+    const [editMode, setEditMode] = useState(false);
   
     const deleteNote = (noteId) => {
       const answer = window.confirm("Are you sure you want to delete this note?");
@@ -38,17 +39,17 @@ function Main(event) {
         setNotes(notes.filter((note) => note.id !== noteId));
       }
     };
-    
+
     const addNote = () => {
-      const noteAttributes = { //Creates objects of a new note with initial values
-        id: uuid(), //use library to create unique id for each new note
+      const newNote = { //Creates objects of a new note with initial values
+        id: notes.length + 1, //Set note id that increments by 1 each note
         title: "Untitled",
         datetime: null,
         body: " ",
       };
-  
-      setNotes([noteAttributes, ...notes]); //create new array of note objects and insert notes from previous array
-      setSelectedNote(noteAttributes.id);
+      setNotes([newNote, ...notes]); //create new array of note objects and insert notes from previous array
+      setSelectedNote(newNote.id);
+      setEditMode(true);
     }
   
     const getSelectedNote = () => {
@@ -57,20 +58,20 @@ function Main(event) {
     }
 
     const updateNote = (updatedNote) => {
-      const updateNoteAttributes = {
+      const updateNewNote = {
         ...updatedNote, //Add unmodified note fields to the updatedNote
         datetime: formatDatetime(updatedNote.datetime) //Modify datetime format and save in updateNote
       };
     
       const updatedNotes = notes.map((note) => {
         if (note.id === selectedNote) {
-          return updateNoteAttributes;
+          return updateNewNote;
         }
         return note;
       });
     
       setNotes(updatedNotes); //save updated notes to notes array
-    };
+    }
   
     return ( 
       <main>
@@ -87,6 +88,8 @@ function Main(event) {
           selectedNote={getSelectedNote()}
           deleteNote={deleteNote}
           updateNote={updateNote}
+          editMode={editMode} // pass editMode as prop
+          setEditMode={setEditMode} // pass setEditMode as prop
           /> {/*Call to Column2 component*/}
         </div>
       </main>
