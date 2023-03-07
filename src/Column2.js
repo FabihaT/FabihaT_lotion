@@ -1,9 +1,11 @@
 import {useState} from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
 function Column2({selectedNote, deleteNote, updateNote, editMode, setEditMode}) {
+  const navigate = useNavigate();
+  
   const editField = (field, value) => {
     updateNote({
       ...selectedNote, //Add all current fields to updateNote
@@ -20,6 +22,7 @@ function Column2({selectedNote, deleteNote, updateNote, editMode, setEditMode}) 
     };
 
     updateNote(updatedNote); //Save modified selectedNote and datetime to updateNote
+    navigate(`/notes/${selectedNote.id}`);
     setEditMode(false);
   };
 
@@ -95,7 +98,9 @@ function Column2({selectedNote, deleteNote, updateNote, editMode, setEditMode}) 
             <small>{selectedNote.datetime}</small>
           </div>
           <div>
-            <button className="navbutton" onClick={() => setEditMode(true)}>Edit</button>
+            <button className="navbutton" onClick={() => {
+              navigate(`/notes/${selectedNote.id}/edit`);
+              setEditMode(true);}}>Edit</button>
             <button className="navbutton" onClick={() => deleteNote(selectedNote.id)}>Delete</button>
           </div>
         </div>

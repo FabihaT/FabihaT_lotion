@@ -1,7 +1,6 @@
-import Main from "./Main";
-import Header from "./Header";
 import {useState} from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./Layout";
 
 function App() {
   const [toggleColumn1, setToggle] = useState(true); //Set state variable if Column1 is currently visible
@@ -11,24 +10,15 @@ function App() {
   }
   
   return (
-    <div className="App">
-      <Header sideButton={sideButton} />
-      <Main toggleColumn1={toggleColumn1} />
-    </div>
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Header sideButton={sideButton} />} />
-    //     <Route path="/notes" element={<Main toggleColumn1={toggleColumn1} />} />
-    //   </Routes>
-    // </BrowserRouter>
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/notes/*" element={<Layout />} >
-    //       <Route path="/" element={<Header sideButton={sideButton} />} />
-    //       <Route path="/" element={<Main toggleColumn1={toggleColumn1} />} />
-    //     </Route>
-    //   </Routes>
-    // </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout sideButton={sideButton} toggleColumn1={toggleColumn1}/>}>
+          <Route path="/notes/:noteId?" element={<Navigate replace to="/notes" />}/>
+          <Route path="/notes/:noteId?" element={<Navigate replace to="/notes" />}/>
+          <Route path="/notes/:noteId?/edit" element={<Navigate replace to="/notes" />}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
