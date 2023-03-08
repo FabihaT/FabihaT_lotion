@@ -26,7 +26,8 @@ function Column2({selectedNote, deleteNote, updateNote, editMode, setEditMode}) 
     setEditMode(false);
   };
 
-  let currentDatetime = new Date(Date.now()).toISOString().slice(0, 16);
+  var tzoffset = (new Date()).getTimezoneOffset() * 60000; //To get correct timezone
+  let currentDatetime = new Date(Date.now() - tzoffset).toISOString().slice(0, 16);
   const [selectDatetime, setSelectDatetime] = useState(currentDatetime);
   const onDateChange = (e) => {
     setSelectDatetime(new Date(e.target.value).toISOString().slice(0, 16));
